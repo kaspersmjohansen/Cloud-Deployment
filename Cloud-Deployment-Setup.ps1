@@ -1,4 +1,5 @@
 ﻿$OSDCloudFolder = "D:\OSDCloud"
+$OSDWallpaperFolder = $OSDCloudFolder + "\" + "wallpaper"
 
 If (!(Test-Path -Path $OSDCloudFolder))
 {
@@ -21,11 +22,11 @@ Get-AutopilotProfile | Where-Object DisplayName -eq $Autopilotdisplayname | Conv
 Edit-OSDCloud.winpe -WorkspacePath $OSDCloudFolder
 
 # Create wallpaper folder and download wallpaper
-If (!(Test-Path -Path "$OSDCloudFolder\Wallpaper"))
+If (!(Test-Path -Path "$OSDWallpaperFolder"))
 {
-New-Item -Path "$OSDCloudFolder\Wallpaper" -ItemType Directory -Verbose
+New-Item -Path "$OSDWallpaperFolder" -ItemType Directory -Verbose
 }
-Invoke-WebRequest -Uri https://github.com/kaspersmjohansen/Cloud-Deployment/raw/main/wallpaper.jpg -OutFile "$OSDCloudFolder\Wallpaper\wallpaper.jpg"
+Invoke-WebRequest -Uri https://github.com/kaspersmjohansen/Cloud-Deployment/raw/main/wallpaper.jpg -OutFile "$OSDWallpaperFolder\wallpaper.jpg"
 
 # Cloud drivers
 # Edit-OSDCloud.winpe -CloudDriver Dell,Nutanix,VMware
@@ -36,7 +37,7 @@ Invoke-WebRequest -Uri https://github.com/kaspersmjohansen/Cloud-Deployment/raw/
 
 # New-OSDCloud.template -WinRE -Language da-dk -SetAllIntl da-dk -SetInputLocale da-dk -verbose
 New-OSDCloud.template -WinRE -SetInputLocale da-dk -verbose
-New-OSDCloud.workspace -workspacepath $OSDCloudFolder -Verbose
+#New-OSDCloud.workspace -workspacepath $OSDCloudFolder -Verbose
 
 Edit-OSDCloud.winpe -workspacepath $OSDCloudFolder -WebPSScript https://raw.githubusercontent.com/kaspersmjohansen/Cloud-Deployment/main/Cloud-Deployment.ps1 -wallpaper "$OSDCloudFolder\Wallpaper\wallpaper.jpg" -Verbose
 
