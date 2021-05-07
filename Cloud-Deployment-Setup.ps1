@@ -1,4 +1,4 @@
-﻿$OSDCloudFolder = "C:\OSDCloud"
+﻿$OSDCloudFolder = "C:\Working\OSDCloud"
 $OSDWallpaperFolder = $OSDCloudFolder + "\" + "wallpaper"
 
 # Clear sreen
@@ -24,20 +24,26 @@ Import-Module PowerShellGet -Force
 Install-Module -Name OSD -force
 New-OSDCloud.template -WinRE -SetInputLocale da-dk -verbose
 
-
 # Autopilot creds
 $Autopilotcreds = Get-Credential
+Install-Module -Name AzureAD -Force
+Install-Module -Name WindowsAutopilotIntune -Force
 Install-module Microsoft.Graph -Force
 Import-Module Microsoft.Graph
 Connect-MSGraph -Credential $Autopilotcreds
 $Autopilotdisplayname = (Get-AutopilotProfile).displayname
 
-# Autopilot configuration
-Get-AutopilotProfile | Where-Object DisplayName -eq $Autopilotdisplayname | ConvertTo-AutopilotConfigurationJSON | Out-File -FilePath "$OSDCloudFolder\AutoPilot\Profiles\AutoPilotConfigurationFile.json" -Encoding ASCII
-
-
-
 New-OSDCloud.workspace -WorkspacePath $OSDCloudFolder
+
+# Autopilot configuration
+If (!(Test-Path -Path "$OSDCloudFolder\Autopilot"))
+{
+New-Item -Path $OSDCloudFolder -Name Autopilot -ItemType Directory
+New-Item -Path "$OSDCloudFolder\Autopilot" -Name Profiles -ItemType Directory
+}
+Get-AutopilotProfile | Where-Object DisplayName -eq $Autopilotdisplayname | ConvertTo-AutopilotConfigurationJSON | Out-File -FilePath "$OSDCloudFolder\Autopilot\Profiles\AutoPilotConfigurationFile.json" -Encoding ASCII
+
+# New-OSDCloud.workspace -WorkspacePath $OSDCloudFolder
 #Edit-OSDCloud.winpe -WorkspacePath $OSDCloudFolder
 
 # Create wallpaper folder and download wallpaper
@@ -57,10 +63,7 @@ Invoke-WebRequest -Uri https://github.com/kaspersmjohansen/Cloud-Deployment/raw/
 # New-OSDCloud.template -WinRE -Language da-dk -SetAllIntl da-dk -SetInputLocale da-dk -verbose
 
 # New-OSDCloud.workspace -workspacepath $OSDCloudFolder -Verbose
-
 Edit-OSDCloud.winpe -workspacepath $OSDCloudFolder -WebPSScript https://raw.githubusercontent.com/kaspersmjohansen/Cloud-Deployment/main/Cloud-Deployment.ps1 -wallpaper "$OSDCloudFolder\Wallpaper\wallpaper.jpg" -Verbose
-
-
 
 # Create boot ISO
 New-OSDCloud.iso -workspacepath $OSDCloudFolder
