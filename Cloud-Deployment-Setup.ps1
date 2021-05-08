@@ -63,7 +63,7 @@ Invoke-WebRequest -Uri https://github.com/kaspersmjohansen/Cloud-Deployment/raw/
 # New-OSDCloud.template -WinRE -Language da-dk -SetAllIntl da-dk -SetInputLocale da-dk -verbose
 
 # New-OSDCloud.workspace -workspacepath $OSDCloudFolder -Verbose
-Edit-OSDCloud.winpe -workspacepath $OSDCloudFolder -WebPSScript https://raw.githubusercontent.com/kaspersmjohansen/Cloud-Deployment/main/Cloud-Deployment.ps1 -wallpaper "$OSDCloudFolder\Wallpaper\wallpaper.jpg" -Verbose
+Edit-OSDCloud.winpe -workspacepath $OSDCloudFolder -WebPSScript https://raw.githubusercontent.com/kaspersmjohansen/Cloud-Deployment/main/Cloud-Deployment.ps1 -wallpaper "$OSDCloudFolder\Wallpaper\wallpaper.jpg" -CloudDriver WiFi -Verbose
 
 # Create boot ISO
 New-OSDCloud.iso -workspacepath $OSDCloudFolder
