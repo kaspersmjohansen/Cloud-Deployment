@@ -53,17 +53,8 @@ New-Item -Path "$OSDWallpaperFolder" -ItemType Directory -Verbose
 }
 Invoke-WebRequest -Uri https://github.com/kaspersmjohansen/Cloud-Deployment/raw/main/wallpaper.jpg -OutFile "$OSDWallpaperFolder\wallpaper.jpg"
 
-# Cloud drivers
-# Edit-OSDCloud.winpe -CloudDriver Dell,Nutanix,VMware
-
-# Your own drivers
-# Edit-OSDCloud.winpe -DriverPath $OSDCloudFolder
-
-
-# New-OSDCloud.template -WinRE -Language da-dk -SetAllIntl da-dk -SetInputLocale da-dk -verbose
-
 # New-OSDCloud.workspace -workspacepath $OSDCloudFolder -Verbose
-Edit-OSDCloud.winpe -workspacepath $OSDCloudFolder -WebPSScript https://raw.githubusercontent.com/kaspersmjohansen/Cloud-Deployment/main/Cloud-Deployment.ps1 -wallpaper "$OSDCloudFolder\Wallpaper\wallpaper.jpg" -CloudDriver WiFi -Verbose
+Edit-OSDCloud.winpe -workspacepath $OSDCloudFolder -WebPSScript https://raw.githubusercontent.com/kaspersmjohansen/Cloud-Deployment/main/Cloud-Deployment.ps1 -wallpaper "$OSDCloudFolder\Wallpaper\wallpaper.jpg" -CloudDriver WiFi -DriverPath "C:\Working\Drivers\SurfaceUpdate\8897WLAN" -Verbose
 
 # Create boot ISO
 New-OSDCloud.iso -workspacepath $OSDCloudFolder
