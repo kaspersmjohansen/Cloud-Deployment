@@ -22,7 +22,7 @@ New-Item -Path $OSDCloudFolder -ItemType Directory -Verbose
 
 Import-Module PowerShellGet -Force
 Install-Module -Name OSD -force
-New-OSDCloud.template -WinRE -SetInputLocale da-dk -verbose
+New-OSDCloud.template -WinRE -SetAllIntl da-dk -SetInputLocale da-dk -verbose
 
 # Autopilot creds
 $Autopilotcreds = Get-Credential
