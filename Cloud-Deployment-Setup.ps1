@@ -54,7 +54,7 @@ New-Item -Path "$OSDWallpaperFolder" -ItemType Directory -Verbose
 Invoke-WebRequest -Uri https://github.com/kaspersmjohansen/Cloud-Deployment/raw/main/wallpaper.jpg -OutFile "$OSDWallpaperFolder\wallpaper.jpg"
 
 # New-OSDCloud.workspace -workspacepath $OSDCloudFolder -Verbose
-Edit-OSDCloud.winpe -workspacepath $OSDCloudFolder -WebPSScript https://raw.githubusercontent.com/kaspersmjohansen/Cloud-Deployment/main/Cloud-Deployment.ps1 -wallpaper "$OSDCloudFolder\Wallpaper\wallpaper.jpg" -CloudDriver WiFi -DriverPath "C:\Working\Drivers\SurfaceUpdate\8897WLAN" -Verbose
+Edit-OSDCloud.winpe -workspacepath $OSDCloudFolder -WebPSScript https://raw.githubusercontent.com/kaspersmjohansen/Cloud-Deployment/main/Cloud-Deployment.ps1 -wallpaper "$OSDCloudFolder\Wallpaper\wallpaper.jpg" -CloudDriver WiFi -DriverPath "C:\Users\kjo\OneDrive - edgemo\OSDCloud Drivers\WiFi" -Verbose
 
 # Create boot ISO
 New-OSDCloud.iso -workspacepath $OSDCloudFolder
